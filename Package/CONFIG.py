@@ -4,28 +4,18 @@ import iopc
 pkg_path = ""
 output_dir = ""
 output_rootfs_dir = ""
-src_hda="hda.img"
-src_hdb="hdb.img"
-src_hdc="hdc.img"
-src_hdd="hdd.img"
 sh_parted="Parted.sh"
+storage_generator="gen_storage.py"
 
 def set_global(args):
     global pkg_path
     global output_dir 
     global output_rootfs_dir
-    global src_hda
-    global src_hdb
-    global src_hdc
-    global src_hdd
     global sh_parted
+    global storage_generator
     pkg_path = args["pkg_path"]
     output_dir = args["output_path"]
     output_rootfs_dir = ops.path_join(iopc.getOutputRootDir(), "qemu")
-    src_hda=ops.path_join(pkg_path, src_hda)
-    src_hdb=ops.path_join(pkg_path, src_hdb)
-    src_hdc=ops.path_join(pkg_path, src_hdc)
-    src_hdd=ops.path_join(pkg_path, src_hdd)
     sh_parted=ops.path_join(pkg_path, sh_parted)
 
 def MAIN_ENV(args):
@@ -36,10 +26,17 @@ def MAIN_EXTRACT(args):
     set_global(args)
 
     ops.mkdir(output_rootfs_dir)
-    ops.copyto(src_hda, output_rootfs_dir)
-    ops.copyto(src_hdb, output_rootfs_dir)
-    ops.copyto(src_hdc, output_rootfs_dir)
-    ops.copyto(src_hdd, output_rootfs_dir)
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hda.img')] 
+    ops.execCmd(CMD, pkg_path, False)
+
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdb.img')] 
+    ops.execCmd(CMD, pkg_path, False)
+
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdc.img')] 
+    ops.execCmd(CMD, pkg_path, False)
+
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdd.img')] 
+    ops.execCmd(CMD, pkg_path, False)
 
     return True
 
