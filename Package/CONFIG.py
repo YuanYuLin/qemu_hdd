@@ -29,13 +29,19 @@ def MAIN_EXTRACT(args):
     CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hda.img')] 
     ops.execCmd(CMD, pkg_path, False)
 
-    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdb.img')] 
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'vda.img')] 
     ops.execCmd(CMD, pkg_path, False)
 
-    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdc.img')] 
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'vdb.img')] 
     ops.execCmd(CMD, pkg_path, False)
 
-    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'hdd.img')] 
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'vdc.img')] 
+    ops.execCmd(CMD, pkg_path, False)
+
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'vdd.img')] 
+    ops.execCmd(CMD, pkg_path, False)
+
+    CMD = ['python2.7', storage_generator, ops.path_join(output_rootfs_dir, 'vde.img')] 
     ops.execCmd(CMD, pkg_path, False)
 
     return True
@@ -61,6 +67,11 @@ def MAIN_BUILD(args):
     return False
 
 def MAIN_INSTALL(args):
+    set_global(args)
+
+    return False
+
+def MAIN_SDKENV(args):
     set_global(args)
 
     return False
