@@ -8,7 +8,7 @@ n
 p
 1
  #enter
-+50M
++1M
 n
 p
 2
